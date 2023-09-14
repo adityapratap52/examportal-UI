@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
-import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login/login.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private service: LoginService
+    private service: LoginService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,17 +32,27 @@ export class LoginComponent implements OnInit {
 
     this.service.generateTokenByLogin(this.loginDetails).subscribe(
     (success: any) => {
-      console.log(success);
 
-      // login ..
-      this.service.saveToken(success.token);
+      // save token and user information
+      this.service.saveTokenIntoLocalStorage(success.token);
       this.service.getCurrentUser().subscribe(
       (user: any) => {
-          this.service.saveUser(user);
+          this.service.saveUserIntoLocalStorage(user);
 
-          // redirect..ADMIN: admin-dashboard
+          // redirect..ADMIN: dashboard and redirect..USER: user-dashboard
+          if(this.service.getUserRole() == 'ADMIN') {
 
-          // redirect..USER: user-dashboard
+            // window.location.href='/admin'    // it reload to whole application
+            this.router.navigate(['admin']);    // it's not reload
+            this.service.loginStatusSubject.next(true);
+          } else if(this.service.getUserRole() == 'NORMAL') {
+
+            this.router.navigate(['user-dashboard']);
+            this.service.loginStatusSubject.next(true);
+          } else {
+            this.service.logout();   
+            // location.reload();       // it is refresh whole application so we can't use
+          }
       });
     }, 
     (error) => {

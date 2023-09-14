@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import baseUrl from './helper';
+import baseUrl from '../helper/helper';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+
+  public loginStatusSubject = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
@@ -19,13 +22,13 @@ export class LoginService {
   }
 
   // save token in localstorage
-  public saveToken(token: string) {
+  public saveTokenIntoLocalStorage(token: string) {
     localStorage.setItem("token", token);
     return true;
   }
 
   // save userdetails into local storage
-  public saveUser(user: any) {
+  public saveUserIntoLocalStorage(user: any) {
     localStorage.setItem('user', JSON.stringify(user));
   }
   
