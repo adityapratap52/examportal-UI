@@ -28,16 +28,16 @@ export class SignupComponent implements OnInit {
 
   submitRegisterForm() {
 
-    if(this.user.email.trim() == '' || this.user.firstName.trim() == '' || this.user.lastName.trim() == '' 
-    || this.user.username.trim() == '' || this.user.password.trim() == '' ) {
-      // alert('All fields are mandatory!')
-      this.snack.open("Please fill all fields!","Close",{
-        duration:3000,
-        // verticalPosition: 'top',
-        // horizontalPosition: 'right'
-      });
-      return;
-    }
+    // if(this.user.email.trim() == '' || this.user.firstName.trim() == '' || this.user.lastName.trim() == '' 
+    // || this.user.username.trim() == '' || this.user.password.trim() == '' ) {
+    //   // alert('All fields are mandatory!')
+    //   this.snack.open("Please fill all fields!","Close",{
+    //     duration:3000,
+    //     // verticalPosition: 'top',
+    //     // horizontalPosition: 'right'
+    //   });
+    //   return;
+    // }
     this.userService.saveUser(this.user).subscribe(
       (success)=>{
         // alert('User Successfully inserted');
@@ -55,8 +55,12 @@ export class SignupComponent implements OnInit {
     },
     (error)=> {
       console.log(error);
-      // alert(error);
-      Swal.fire("Error", "Something went wrong","error");
+      console.log(error.error.message);
+      if(error.error.message != null) {
+        Swal.fire("Error", error.error.message);
+      } else {
+        Swal.fire("Error", "Something went wrong!!!");
+      }
       this.user = {
         username: '',
         password: '',
@@ -65,6 +69,7 @@ export class SignupComponent implements OnInit {
         email: '',
         phone: ''
       }
+      return;
     });
   }
 }

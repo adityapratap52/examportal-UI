@@ -10,13 +10,18 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class NavbarComponent implements OnInit {
 
-  isLoggedIn: boolean = false;
-  user:any = null;
+  public isLoggedIn: boolean = false;
+  public user:any = null;
 
   constructor(
     private service: LoginService,
     private router: Router,
-    private snack: MatSnackBar) { }
+    private snack: MatSnackBar) { 
+      if (localStorage.getItem('user') != null) {
+          this.isLoggedIn = this.service.userIsLoggedIn();
+          this.user = this.service.getUser();
+      }
+    }
 
   ngOnInit(): void {
     this.service.loginStatusSubject.asObservable().subscribe((data)=>{
@@ -35,13 +40,13 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  isUserLoggedIn() {
-    this.isLoggedIn = this.service.userIsLoggedIn();
+  // isUserLoggedIn() {
+  //   this.isLoggedIn = this.service.userIsLoggedIn();
 
-    if (this.isLoggedIn == true) {
-      this.user = this.service.getUser();
-    }
+  //   if (this.isLoggedIn == true) {
+  //     this.user = this.service.getUser();
+  //   }
 
-    return this.isLoggedIn;
-  }
+  //   return this.isLoggedIn;
+  // }
 }
