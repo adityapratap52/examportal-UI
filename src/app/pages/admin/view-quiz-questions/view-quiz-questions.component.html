@@ -2,6 +2,11 @@
 <div class="bootstrap-wrapper">
     <div class="row">
         <div class="col-md-12">
+
+            <div class="container text-center">
+                <button mat-raised-button color="primary" [routerLink]="'/admin/add-question/' + qId + '/' + qTitle">Add Question</button>
+            </div>
+
             <mat-card *ngFor="let q of questions; let i = index" class="mt-20">
                 <mat-card-content>
                     <p>            <!-- [innerHTML] -> if html present in content then it shows  -->

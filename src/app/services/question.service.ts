@@ -11,6 +11,10 @@ export class QuestionService {
     private _http: HttpClient
   ) { }
 
+  public addQuestion(question:any) {
+    return this._http.post(`${baseUrl}/question/add`, question);
+  }
+
   public getQuestionsOfQuiz(qId:any) {
     return this._http.get(`${baseUrl}/question/getByQuizId/all/${qId}`);
   }
