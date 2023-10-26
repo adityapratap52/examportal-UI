@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from 'src/app/services/question.service';
 import Swal from 'sweetalert2';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-add-question',
@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit {
+
+  public Editor:any = ClassicEditor;
 
   qId:any;
   qTitle:any;
@@ -25,7 +27,6 @@ export class AddQuestionComponent implements OnInit {
 
   constructor(private _rout: ActivatedRoute,
               private _quesService: QuestionService,
-              private _snack: MatSnackBar,
               private _router: Router) { }
 
   ngOnInit(): void {
@@ -36,9 +37,16 @@ export class AddQuestionComponent implements OnInit {
 
   public addQuestion() {
     if(this.question.content == null || this.question.content.trim() == '') {
-      this._snack.open('Please enter question content', 'close', {
-        duration: 3000
-      });
+      return;
+    }
+    if(this.question.option1 == null || this.question.option1.trim() == '') {
+      return;
+    }
+    if(this.question.option2 == null || this.question.option2.trim() == '') {
+      return;
+    }
+    if(this.question.answer == null || this.question.answer == undefined || this.question.answer == '') {
+      return;
     }
     this._quesService.addQuestion(this.question).subscribe((data:any) => {
       Swal.fire({
