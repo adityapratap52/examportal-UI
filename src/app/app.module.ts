@@ -33,7 +33,10 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import { ViewQuizQuestionsComponent } from './pages/admin/view-quiz-questions/view-quiz-questions.component';
 import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SidebarComponent as UserSidebar } from './pages/user/sidebar/sidebar.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
+import { InstructionsComponent } from './pages/user/instructions/instructions.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ViewQuizzesComponent,
     AddQuizComponent,
     ViewQuizQuestionsComponent,
-    AddQuestionComponent
+    AddQuestionComponent,
+    UserSidebar,
+    LoadQuizComponent,
+    InstructionsComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +77,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatListModule,
     MatSlideToggleModule,
     MatSelectModule,
-    CKEditorModule,
+    MatTreeModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

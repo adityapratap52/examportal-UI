@@ -17,6 +17,14 @@ export class QuizService {
     return this._http.get(`${baseUrl}/quiz/getAll`);
   }
 
+  public getActiveQuizzes() {
+    return this._http.get(`${baseUrl}/quiz/getActiveQuizzes`);
+  }
+
+  public getActiveQuizzesByCategoryId(cId:any) {
+    return this._http.get(`${baseUrl}/quiz/getActiveQuizzesByCategoryId/${cId}`);
+  }
+
   public getQuizById(qId:any) {
     return this._http.get(`${baseUrl}/quiz/getById/${qId}`);
   }

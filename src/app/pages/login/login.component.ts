@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
             this.service.loginStatusSubject.next(true);
           } else if(this.service.getUserRole() == 'NORMAL') {
 
-            this.router.navigate(['user-dashboard']);
+            this.router.navigate(['user-dashboard/0']);
             this.service.loginStatusSubject.next(true);
           } else {
             this.service.logout();   
