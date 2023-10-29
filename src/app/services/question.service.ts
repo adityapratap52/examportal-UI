@@ -19,6 +19,10 @@ export class QuestionService {
     return this._http.get(`${baseUrl}/question/getByQuizId/all/${qId}`);
   }
 
+  public getQuestionsOfQuizForUser(qId:any) {
+    return this._http.get(`${baseUrl}/question/getByQuizId/${qId}`);
+  }
+
   public deleteQuestion(quesId:any) {
     return this._http.delete(`${baseUrl}/question/deleteById/${quesId}`);
   }
