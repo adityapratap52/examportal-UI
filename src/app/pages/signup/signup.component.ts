@@ -30,16 +30,16 @@ export class SignupComponent implements OnInit {
 
   submitRegisterForm() {
 
-    // if(this.user.email.trim() == '' || this.user.firstName.trim() == '' || this.user.lastName.trim() == '' 
-    // || this.user.username.trim() == '' || this.user.password.trim() == '' ) {
-    //   // alert('All fields are mandatory!')
-    //   this.snack.open("Please fill all fields!","Close",{
-    //     duration:3000,
-    //     // verticalPosition: 'top',
-    //     // horizontalPosition: 'right'
-    //   });
-    //   return;
-    // }
+    if(this.user.email.trim() == '' || this.user.firstName.trim() == ''
+    || this.user.username.trim() == '' || this.user.password.trim() == '' ) {
+      // alert('All fields are mandatory!')
+      this.snack.open("Please fill mendatory fields!","Close",{
+        duration:3000,
+        // verticalPosition: 'top',
+        // horizontalPosition: 'right'
+      });
+      return;
+    }
     this.userService.saveUser(this.user).subscribe(
       (success)=>{
         this.user = {

@@ -56,8 +56,13 @@ export class LoginComponent implements OnInit {
       });
     }, 
     (error) => {
+      console.log('my error : ',error.error.message)
       console.log(error);
-      Swal.fire("Invalid Credentials","Username and password is not correct","error");
+      if(error.error.message != null && error.error.message != undefined) {
+        Swal.fire("Error",error.error.message.message,"error");
+      } else {
+        Swal.fire("Error","Internal Server Error","error");
+      }
     });
   }
 }

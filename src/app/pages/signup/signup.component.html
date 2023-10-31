@@ -8,7 +8,7 @@
                     <form (ngSubmit)="submitRegisterForm()">
                         <mat-form-field class="my-input" appearance="outline">
                             <mat-label>First Name</mat-label>
-                            <input type="text" [(ngModel)]="user.firstName" name="firstName" matInput placeholder="enter your First Name">
+                            <input required type="text" [(ngModel)]="user.firstName" name="firstName" matInput placeholder="enter your First Name">
                         </mat-form-field>
                         <mat-form-field class="my-input"  appearance="outline">
                             <mat-label>Last Name</mat-label>
